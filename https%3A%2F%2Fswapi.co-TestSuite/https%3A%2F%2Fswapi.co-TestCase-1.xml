@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="2b598e90-6d04-4e36-a104-3ce97484cffe" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="https://swapi.co TestCase 1" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" zephyrTestName="" zephyrTestId="" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="2b598e90-6d04-4e36-a104-3ce97484cffefileName">https%3A%2F%2Fswapi.co-TestCase-1</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="datasource" name="DataSource" id="d4e1c49d-cfda-4bda-8f25-a2a4eda801e2">
+    <con:settings/>
+    <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:dataSource type="Data Generator">
+        <con:configuration>
+          <generatedDataCount>10</generatedDataCount>
+          <generatorsTotalNumber>1</generatorsTotalNumber>
+          <lastSelectedProperty>0</lastSelectedProperty>
+          <GeneratorType0>INT</GeneratorType0>
+          <PropertyName0>people</PropertyName0>
+          <repetitionCountpeople>0</repetitionCountpeople>
+          <repeatValuespeople>false</repeatValuespeople>
+          <IntegerDataGeneratorMinValuepeople>1</IntegerDataGeneratorMinValuepeople>
+          <IntegerDataGeneratorMaxValuepeople>80</IntegerDataGeneratorMaxValuepeople>
+          <IntegerDataGeneratorStepValuepeople>1</IntegerDataGeneratorStepValuepeople>
+          <IntegerDataGeneratorConsequentValuespeople>false</IntegerDataGeneratorConsequentValuespeople>
+          <escapeSpaceSequence/>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>people</con:property>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:restartOnRun>true</con:restartOnRun>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Request 1" id="c7aef15e-8567-4534-89fd-05eab9d02b49">
+    <con:settings/>
+    <con:config service="https://swapi.co" resourcePath="/api/people/{person}/" methodName="1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="Request 1" id="4166bc76-2296-4ee7-98c5-7f6e53eec858" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://swapi.co</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://swapi.co/api/people/1/</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="d14efa75-b25b-4424-9c23-3875d33f64cb" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath RegEx Match" id="cc710c6c-7ad9-4cb3-99f8-bdf143da1f32" name="Match content of [gender] using RegEx">
+          <con:configuration>
+            <path>$['gender']</path>
+            <content>true</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+            <regEx>male|female</regEx>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <entry key="person" value="${DataSource#people}" xmlns="http://eviware.com/soapui/config"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>person</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="DataSource Loop" id="6e6e7af3-8f11-4041-99b9-74bc1c71cbb9">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>DataSource</dataSourceStep>
+      <targetStep>Request 1</targetStep>
+      <discardResults>false</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>6e6e7af3-8f11-4041-99b9-74bc1c71cbb9</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>
